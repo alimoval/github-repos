@@ -1,3 +1,3 @@
-<h1>
-  {{title}}
-</h1>
+<form [formGroup]="form">
+  <input type="text" (input)="onInput($event)" formControlName="query">
+</form>
