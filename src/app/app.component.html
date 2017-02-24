@@ -1,3 +1,9 @@
 <form [formGroup]="form">
   <input type="text" (input)="onInput($event)" formControlName="query">
 </form>
+
+<div>
+  <img [src]="repos.owner.avatar_url">
+</div>
+
+{{repos | json}}

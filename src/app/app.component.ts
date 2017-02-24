@@ -1,13 +1,13 @@
 import { Component, OnInit, Output, Input } from '@angular/core';
 import { FormControl, FormGroup, FormArray, FormBuilder, Validators } from "@angular/forms";
-import {Http} from "@angular/http";
+import { Http } from "@angular/http";
 import { Subject } from "rxjs/Subject";
 import { Observable } from "rxjs/Observable";
 
-import "rxjs/add/observable/fromPromise";
+//import "rxjs/add/observable/fromPromise";
 import "rxjs/add/operator/debounceTime";
 import "rxjs/add/operator/map";
-import "rxjs/add/operator/do";
+//import "rxjs/add/operator/do";
 import "rxjs/add/operator/switchMap";
 
 @Component({
@@ -16,6 +16,9 @@ import "rxjs/add/operator/switchMap";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
+
+  @Input()
+  public repos: Repo[];
 
   public form: FormGroup;
   public inputEvents: Subject<KeyboardEvent> = new Subject<KeyboardEvent>();
@@ -34,8 +37,9 @@ export class AppComponent implements OnInit {
       .debounceTime(300)
       .map((event: KeyboardEvent) => (event.target as HTMLInputElement).value)
       .switchMap((query: string) =>  
-        this._http.get('https://api.github.com/search/repositories?q='+query)
+        this._http.get('https://api.github.com/search/repositories?client_id=alimoval&client_secret=yyyy&q='+query)
       )
-      .subscribe();
+      .map(res => res.json())
+      .subscribe(res => {this.repos = res.items});
   }
 }
