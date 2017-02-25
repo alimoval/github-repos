@@ -17,7 +17,6 @@ import "rxjs/add/operator/switchMap";
 })
 export class AppComponent implements OnInit {
 
-  @Input()
   public repos: Repo[];
 
   public form: FormGroup;
@@ -37,7 +36,7 @@ export class AppComponent implements OnInit {
       .debounceTime(300)
       .map((event: KeyboardEvent) => (event.target as HTMLInputElement).value)
       .switchMap((query: string) =>  
-        this._http.get('https://api.github.com/search/repositories?client_id=alimoval&client_secret=yyyy&q='+query)
+        this._http.get('https://api.github.com/search/repositories?q='+query)
       )
       .map(res => res.json())
       .subscribe(res => {this.repos = res.items});

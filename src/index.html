@@ -1,5 +1,6 @@
 <!doctype html>
 <html>
+
 <head>
   <meta charset="utf-8">
   <title>RxLesson1</title>
@@ -7,8 +8,29 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="stylesheet" type="text/css" href="assets/Semantic-UI-CSS-master/semantic.min.css">
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+    crossorigin="anonymous"></script>
+    <script src="assets/Semantic-UI-CSS-master/semantic.min.js"></script>
 </head>
+
 <body>
+  <script>
+    $('.ui.search')
+      .search({
+        apiSettings: {
+          url: '//api.github.com/search/repositories?q=${inputEvents}'
+        },
+        fields: {
+          results: 'items',
+          title: 'name',
+          url: 'html_url'
+        },
+        minCharacters: 3
+      })
+      ;
+  </script>
   <app-root>Loading...</app-root>
 </body>
+
 </html>
