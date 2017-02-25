@@ -33,7 +33,7 @@ export class AppComponent implements OnInit {
   ngOnInit() {
 
     this.inputEvents
-      .debounceTime(300)
+      .debounceTime(800)
       .map((event: KeyboardEvent) => (event.target as HTMLInputElement).value)
       .switchMap((query: string) =>  
         this._http.get('https://api.github.com/search/repositories?q='+query)
